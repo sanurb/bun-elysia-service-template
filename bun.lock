@@ -12,6 +12,7 @@
         "elysia": "latest",
         "logixlysia": "^5.0.0",
         "tstl": "^3.0.0",
+        "type-fest": "^4.41.0",
         "typia": "^9.3.1",
       },
       "devDependencies": {
