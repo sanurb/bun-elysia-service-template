@@ -1,11 +1,24 @@
 {
   "compilerOptions": {
-    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "module": "Preserve",
+    "sourceMap": true,
+    "lib": ["es2022"],
+    "noEmit": true,
     "plugins": [
       {
         "transform": "typia/lib/transform"
       }
-    ],
-    "skipLibCheck": true
+    ]
   }
 }
