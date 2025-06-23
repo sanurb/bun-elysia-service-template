@@ -19,6 +19,11 @@
       {
         "transform": "typia/lib/transform"
       }
-    ]
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

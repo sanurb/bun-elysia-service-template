@@ -5,10 +5,10 @@ export interface IUseCaseError {
 /**
  * Base class for use case errors. Extend this for specific error types.
  */
-export abstract class UseCaseError implements IUseCaseError {
-  readonly message: string;
-
+export abstract class UseCaseError extends Error implements IUseCaseError {
   constructor(message: string) {
-    this.message = message;
+    super(message);
+    this.name = this.constructor.name;
+    Object.setPrototypeOf(this, new.target.prototype);
   }
 }
