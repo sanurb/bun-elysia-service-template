@@ -14,8 +14,10 @@ const getMethodFunction = (
     const routes = Reflect.getMetadata(
       'routes',
       target.constructor
-    ) as Array<ElysiaRoute>;
-    if (!propertyKey) throw new Error('Consider adding a method for the route');
+    ) as ElysiaRoute[];
+    if (!propertyKey) {
+      throw new Error('Consider adding a method for the route');
+    }
     routes.push({
       path,
       method,
