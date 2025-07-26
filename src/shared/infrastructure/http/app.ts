@@ -4,8 +4,11 @@ import swagger from '@elysiajs/swagger';
 import { Elysia } from 'elysia';
 import { env } from '../../../config/envs';
 import { pluginGracefulServer } from './plugins/graceful_shutdown/graceful_shutdown';
+import { logger } from './plugins/logger/logging';
+import { consola } from 'consola';
 
 export const http = new Elysia()
+  .use(logger())
   .use(pluginGracefulServer({}))
   .use(swagger())
   .use(cors())
@@ -14,7 +17,7 @@ export const http = new Elysia()
 
 export const app = http.listen(env.PORT);
 
-console.log(
+consola.start(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
 

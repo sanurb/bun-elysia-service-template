@@ -25,7 +25,7 @@ export const pluginGracefulServer = (userConfig: PluginGracefulServer = {}) => {
   const defaultConfig: Required<PluginGracefulServer> = {
     livenessEndpoint: '/live',
     readinessEndpoint: '/ready',
-    serverIsReadyOnStart: false,
+    serverIsReadyOnStart: true,
     closePromises: [],
     onStart: noop,
     onReady: noop,
@@ -44,20 +44,26 @@ export const pluginGracefulServer = (userConfig: PluginGracefulServer = {}) => {
 
     .get(
       config.readinessEndpoint,
-      () => {
+      ({ status }) => {
         if (gracefulShutdownState.isReady) {
           return {
             status: 'ready',
           };
         }
 
-        return status(500);
+        return status(503, {
+          status: 'not ready',
+          message: 'Server is not ready to handle requests',
+        });
       },
       {
         response: {
-          500: t.Any(),
           200: t.Object({
             status: t.String(),
+          }),
+          503: t.Object({
+            status: t.String(),
+            message: t.String(),
           }),
         },
       }

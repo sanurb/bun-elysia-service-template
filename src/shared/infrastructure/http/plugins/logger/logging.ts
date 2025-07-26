@@ -1,22 +1,31 @@
-import { createPinoLogger } from '@bogeychan/elysia-logger';
-import { Elysia } from 'elysia';
+import { consola } from "consola";
+import Elysia from "elysia";
 
-/**
- * Standalone logger instance that can be used outside Elysia context.
- * Use this for logging server startup, port information, etc.
- */
-export const appLogger = createPinoLogger({
-  level: 'info',
-});
-
-/**
- * Elysia plugin for logging using @bogeychan/elysia-logger (pino).
- *
- * @param userConfig Optional logger config overrides.
- *
- * Example:
- *   pluginLogging({ autoLogging: true })
- */
-export const pluginLogging = (userConfig: Record<string, unknown> = {}) => {
-  return new Elysia().use(appLogger.into(userConfig));
-};
+export const logger = ({ methods = ["GET", "PUT", "POST", "DELETE"] } = {}) =>
+	new Elysia({ name: "logger" })
+		.derive({ as: "global" }, () => ({ start: Date.now() }))
+		.onBeforeHandle({ as: "global" }, (ctx) => {
+			if (!methods.includes(ctx.request.method)) return;
+			consola.info(`<-- ${ctx.request.method} ${ctx.path}`);
+		})
+		.onAfterHandle({ as: "global" }, (ctx) => {
+			if (!methods.includes(ctx.request.method)) return;
+			consola.info(
+				`--> ${ctx.request.method} ${ctx.path} ${ctx.set.status ?? Number.NaN} in ${Date.now() - ctx.start} ms`
+			);
+		})
+		.onError({ as: "global" }, (ctx) => {
+			if (!methods.includes(ctx.request.method)) return;
+            const code = ctx.code
+            if (code === 'NOT_FOUND' && (
+                ctx.request.url.includes('favicon.ico') ||
+                ctx.request.url.includes('.ico') ||
+                ctx.request.url.includes('.png') ||
+                ctx.request.url.includes('.svg')
+              )) {
+            return new Response(null, { status: 404 });
+            }
+            consola.error(
+                `--> ${ctx.request.method} ${ctx.path} ${typeof ctx.set.status === "number" ? ctx.set.status : "unknown"} in ${typeof ctx.start === "number" ? Date.now() - ctx.start : 0} ms`,
+            );
+        })
