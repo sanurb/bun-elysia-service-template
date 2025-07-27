@@ -13,9 +13,7 @@
     "noImplicitOverride": true,
     "module": "Preserve",
     "sourceMap": true,
-    "lib": [
-      "es2022"
-    ],
+    "lib": ["es2022"],
     "noEmit": true,
     "plugins": [
       {

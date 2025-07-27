@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'bun:test';
 import {
-  type GuardArgument,
   againstAtLeast,
   againstAtMost,
   againstNullOrUndefined,
   againstNullOrUndefinedBulk,
   allInRange,
   combine,
+  type GuardArgument,
   greaterThan,
   inRange,
   isOneOf,

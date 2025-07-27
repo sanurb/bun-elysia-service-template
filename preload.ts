@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
 import { plugin } from 'bun';
 

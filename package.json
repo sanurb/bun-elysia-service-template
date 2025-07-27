@@ -33,7 +33,7 @@
     "bun-types": "latest",
     "lefthook": "^1.12.2",
     "ts-patch": "^3.3.0",
-    "ultracite": "4.2.13"
+    "ultracite": "5.1.1"
   },
   "module": "src/index.js",
   "type": "module",

@@ -14,7 +14,7 @@ export class Result<T> {
         'InvalidOperation: A result cannot be successful and contain an error'
       );
     }
-    if (!isSuccess && !error) {
+    if (!(isSuccess || error)) {
       throw new Error(
         'InvalidOperation: A failing result needs to contain an error message'
       );

@@ -33,7 +33,7 @@ export abstract class Entity<T extends object> {
     if (this === object) {
       return true;
     }
-    if (!object || !isEntity(object)) {
+    if (!(object && isEntity(object))) {
       return false;
     }
     return this._id.equals(object._id);
