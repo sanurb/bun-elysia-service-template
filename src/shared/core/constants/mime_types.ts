@@ -1244,7 +1244,6 @@ export const MimeTypeUtils = {
       [MIME_TYPES.Eot]: 'eot',
       [MIME_TYPES.Gltf]: 'gltf',
       [MIME_TYPES.Glb]: 'glb',
-      [MIME_TYPES.Obj]: 'obj',
       [MIME_TYPES.Stl]: 'stl',
       [MIME_TYPES.Ply]: 'ply',
       [MIME_TYPES.ThreeDs]: '3ds',

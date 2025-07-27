@@ -1,6 +1,6 @@
 export abstract class DomainError extends Error {
   abstract type: string;
-  abstract message: string;
+  abstract override message: string;
 
   toPrimitives(): {
     type: string;
