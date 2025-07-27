@@ -1,3 +1,4 @@
+import { ResponseHeader } from '@core/constants/http_headers';
 import cors from '@elysiajs/cors';
 import serverTiming from '@elysiajs/server-timing';
 import swagger from '@elysiajs/swagger';
@@ -31,7 +32,7 @@ export const http = new Elysia()
       }),
       {
         status: httpStatus.NotFound,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { [ResponseHeader.ContentType]: 'application/json' },
       }
     );
   });
