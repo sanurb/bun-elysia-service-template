@@ -137,7 +137,7 @@ export default (userOptions: UserPluginOptions = {}) => {
 
     // Add dynamic labels
     for (const [key, fn] of Object.entries(opts.dynamicLabels)) {
-      labels[key] = fn(ctx as any); // Type assertion needed for dynamic labels
+      labels[key] = fn(ctx);
     }
 
     return Object.freeze(labels);
@@ -158,16 +158,30 @@ export default (userOptions: UserPluginOptions = {}) => {
       endTimer: httpRequestDuration.startTimer(getLabels(ctx)),
     }))
     .onAfterHandle({ as: 'global' }, (ctx) => {
-      if (ctx.path.endsWith(opts.metricsPath)) return;
+      if (ctx.path.endsWith(opts.metricsPath)) {
+        return;
+      }
 
-      const labels = getLabels(ctx as any);
+      const labels = getLabels(ctx);
       httpRequestCounter.inc(labels);
       ctx.endTimer(labels);
     })
     .onError({ as: 'global' }, (ctx) => {
-      if (!ctx.endTimer || ctx.path.endsWith(opts.metricsPath)) return;
+      if (!ctx.endTimer || ctx.path.endsWith(opts.metricsPath)) {
+        return;
+      }
 
-      const labels = getLabels(ctx as any);
+      const safeCtx = {
+        ...ctx,
+        query: Object.fromEntries(
+          Object.entries(ctx.query ?? {}).map(([k, v]) => [k, v ?? ''])
+        ),
+        params: Object.fromEntries(
+          Object.entries(ctx.params ?? {}).map(([k, v]) => [k, v ?? ''])
+        ),
+      };
+
+      const labels = getLabels(safeCtx as unknown as Context);
       httpRequestCounter.inc(labels);
       ctx.endTimer(labels);
     })

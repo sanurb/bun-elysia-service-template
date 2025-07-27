@@ -11,7 +11,7 @@
     "deps:major": "bunx taze@latest major -Ilw",
     "lint": "ultracite lint",
     "format": "ultracite format",
-    "prepare": "ts-patch install",
+    "prepare": "ts-patch install && bun run scripts/prepare-env.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
