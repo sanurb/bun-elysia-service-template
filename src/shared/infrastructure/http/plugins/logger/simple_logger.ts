@@ -23,6 +23,9 @@ export const logger = ({ methods = ['GET', 'PUT', 'POST', 'DELETE'] } = {}) =>
         (ctx.request.url.includes('favicon.ico') ||
           ctx.request.url.includes('.ico') ||
           ctx.request.url.includes('.png') ||
+          ctx.request.url.includes('.jpg') ||
+          ctx.request.url.includes('.jpeg') ||
+          ctx.request.url.includes('devtools') ||
           ctx.request.url.includes('.svg'))
       ) {
         return new Response(null, { status: Status.NotFound });
