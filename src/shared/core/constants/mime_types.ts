@@ -187,7 +187,8 @@ const APPLICATION_MIME_TYPES = {
    *
    * [IANA Reference](https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.presentationml.presentation)
    */
-  Powerpoint: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  Powerpoint:
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 
   /**
    * OpenDocument Text.
@@ -318,7 +319,8 @@ const APPLICATION_MIME_TYPES = {
   Unknown: 'application/octet-stream',
 } as const;
 
-type ApplicationMimeType = (typeof APPLICATION_MIME_TYPES)[keyof typeof APPLICATION_MIME_TYPES];
+type ApplicationMimeType =
+  (typeof APPLICATION_MIME_TYPES)[keyof typeof APPLICATION_MIME_TYPES];
 
 //////////////////
 // IMAGE MIME TYPES
@@ -794,7 +796,8 @@ const MULTIPART_MIME_TYPES = {
   ByteRanges: 'multipart/byteranges',
 } as const;
 
-type MultipartMimeType = (typeof MULTIPART_MIME_TYPES)[keyof typeof MULTIPART_MIME_TYPES];
+type MultipartMimeType =
+  (typeof MULTIPART_MIME_TYPES)[keyof typeof MULTIPART_MIME_TYPES];
 
 //////////////////
 // MESSAGE MIME TYPES
@@ -876,7 +879,8 @@ const MESSAGE_MIME_TYPES = {
   SHttp: 'message/s-http',
 } as const;
 
-type MessageMimeType = (typeof MESSAGE_MIME_TYPES)[keyof typeof MESSAGE_MIME_TYPES];
+type MessageMimeType =
+  (typeof MESSAGE_MIME_TYPES)[keyof typeof MESSAGE_MIME_TYPES];
 
 /**
  * All MIME types organized by category.
@@ -1111,15 +1115,17 @@ export const MimeTypeUtils = {
    * Check if a MIME type is a text type.
    */
   isText: (mimeType: string): mimeType is TextMimeType => {
-    return mimeType.startsWith('text/') ||
-           mimeType === MIME_TYPES.Json ||
-           mimeType === MIME_TYPES.Xml ||
-           mimeType === MIME_TYPES.Graphql ||
-           mimeType === MIME_TYPES.GraphqlJson ||
-           mimeType === MIME_TYPES.LdJson ||
-           mimeType === MIME_TYPES.ManifestJson ||
-           mimeType === MIME_TYPES.GeoJson ||
-           mimeType === MIME_TYPES.TopoJson;
+    return (
+      mimeType.startsWith('text/') ||
+      mimeType === MIME_TYPES.Json ||
+      mimeType === MIME_TYPES.Xml ||
+      mimeType === MIME_TYPES.Graphql ||
+      mimeType === MIME_TYPES.GraphqlJson ||
+      mimeType === MIME_TYPES.LdJson ||
+      mimeType === MIME_TYPES.ManifestJson ||
+      mimeType === MIME_TYPES.GeoJson ||
+      mimeType === MIME_TYPES.TopoJson
+    );
   },
 
   /**
@@ -1154,10 +1160,12 @@ export const MimeTypeUtils = {
    * Check if a MIME type is a model type.
    */
   isModel: (mimeType: string): mimeType is ModelMimeType => {
-    return mimeType.startsWith('model/') ||
-           mimeType === MIME_TYPES.Obj ||
-           mimeType === MIME_TYPES.ThreeDs ||
-           mimeType === MIME_TYPES.Fbx;
+    return (
+      mimeType.startsWith('model/') ||
+      mimeType === MIME_TYPES.Obj ||
+      mimeType === MIME_TYPES.ThreeDs ||
+      mimeType === MIME_TYPES.Fbx
+    );
   },
 
   /**
