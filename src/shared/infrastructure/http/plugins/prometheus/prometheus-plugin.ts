@@ -52,6 +52,22 @@ interface PluginOptions {
 
 interface UserPluginOptions extends Partial<PluginOptions> {}
 
+// Export types for external use
+export type { PluginOptions, UserPluginOptions };
+
+// Export constants for external use
+export const PROMETHEUS_CONSTANTS = {
+  DEFAULT_METRICS_PATH,
+  DEFAULT_DURATION_BUCKETS,
+  DEFAULT_USE_ROUTE_PATH,
+  RESERVED_LABEL_NAMES,
+  REQUIRED_LABEL_NAMES,
+  METRIC_NAMES,
+  METRIC_HELP_TEXTS,
+  HTTP_STATUS_CODES,
+  PLUGIN_NAME,
+} as const;
+
 const DEFAULT_OPTIONS: PluginOptions = {
   metricsPath: DEFAULT_METRICS_PATH,
   durationBuckets: [...DEFAULT_DURATION_BUCKETS],
@@ -60,7 +76,12 @@ const DEFAULT_OPTIONS: PluginOptions = {
   useRoutePath: DEFAULT_USE_ROUTE_PATH,
 };
 
-export default (userOptions: UserPluginOptions = {}) => {
+/**
+ * Creates a Prometheus metrics plugin for Elysia
+ * @param userOptions - Configuration options for the plugin
+ * @returns Configured Elysia plugin instance
+ */
+export const createPrometheusPlugin = (userOptions: UserPluginOptions = {}) => {
   const opts: PluginOptions = { ...DEFAULT_OPTIONS, ...userOptions };
 
   const register = new Registry();
@@ -191,3 +212,9 @@ export default (userOptions: UserPluginOptions = {}) => {
       });
     });
 };
+
+/**
+ * Default Prometheus plugin instance with default configuration
+ * @deprecated Use {@link createPrometheusPlugin} instead for better type safety
+ */
+export const prometheusPlugin = createPrometheusPlugin();

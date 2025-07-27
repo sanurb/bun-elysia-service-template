@@ -9,7 +9,7 @@ import { env } from '../../../config/envs';
 import { pluginGracefulServer } from './plugins/graceful_shutdown/graceful_shutdown';
 import { HttpStatusCode } from './plugins/http_status_code/http_status_code';
 import { logger } from './plugins/logger/simple_logger';
-import prometheusPlugin from './plugins/prometheus/prometheus-plugin';
+import { createPrometheusPlugin } from './plugins/prometheus/prometheus-plugin';
 import { requestID } from './plugins/request_id/request_id_plugin';
 
 export const http = new Elysia()
@@ -17,7 +17,7 @@ export const http = new Elysia()
   .use(HttpStatusCode())
   .use(logger())
   .use(pluginGracefulServer({}))
-  .use(prometheusPlugin())
+  .use(createPrometheusPlugin())
   .use(swagger())
   .use(cors())
   .use(serverTiming())
