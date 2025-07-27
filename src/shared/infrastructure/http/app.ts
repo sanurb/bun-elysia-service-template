@@ -7,6 +7,7 @@ import { env } from '../../../config/envs';
 import { pluginGracefulServer } from './plugins/graceful_shutdown/graceful_shutdown';
 import { logger } from './plugins/logger/simple_logger';
 import { requestID } from './plugins/request_id/request_id_plugin';
+import { HTTP_STATUS as Status } from '@core/constants/http_status';
 
 export const http = new Elysia()
   .use(requestID())
@@ -26,7 +27,7 @@ export const http = new Elysia()
         code: 'NOT_FOUND',
       }),
       {
-        status: 404,
+        status: Status.NotFound,
         headers: { 'Content-Type': 'application/json' },
       }
     );

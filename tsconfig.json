@@ -20,6 +20,11 @@
         "transform": "typia/lib/transform"
       }
     ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@core/*": ["./src/shared/core/*"]
+    },
     "strictNullChecks": true
   }
 }

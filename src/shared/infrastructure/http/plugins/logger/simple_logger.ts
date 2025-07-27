@@ -1,5 +1,6 @@
 import { consola } from 'consola';
 import Elysia from 'elysia';
+import { HTTP_STATUS as Status } from '@core/constants/http_status';
 
 export const logger = ({ methods = ['GET', 'PUT', 'POST', 'DELETE'] } = {}) =>
   new Elysia({ name: 'logger' })
@@ -24,7 +25,7 @@ export const logger = ({ methods = ['GET', 'PUT', 'POST', 'DELETE'] } = {}) =>
           ctx.request.url.includes('.png') ||
           ctx.request.url.includes('.svg'))
       ) {
-        return new Response(null, { status: 404 });
+        return new Response(null, { status: Status.NotFound });
       }
       consola.error(
         `--> ${ctx.request.method} ${ctx.path} ${typeof ctx.set.status === 'number' ? ctx.set.status : 'unknown'} in ${typeof ctx.start === 'number' ? Date.now() - ctx.start : 0} ms`
