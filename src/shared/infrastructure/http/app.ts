@@ -9,6 +9,7 @@ import { pluginGracefulServer } from './plugins/graceful_shutdown/graceful_shutd
 import { HttpStatusCode } from './plugins/http_status_code/http_status_code';
 import { logger } from './plugins/logger/simple_logger';
 import { requestID } from './plugins/request_id/request_id_plugin';
+import { MIME_TYPES } from '@/shared/core/constants/mime_types';
 
 export const http = new Elysia()
   .use(requestID())
@@ -32,7 +33,7 @@ export const http = new Elysia()
       }),
       {
         status: httpStatus.NotFound,
-        headers: { [ResponseHeader.ContentType]: 'application/json' },
+        headers: { [ResponseHeader.ContentType]: MIME_TYPES.Application.Json },
       }
     );
   });
