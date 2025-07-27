@@ -1,6 +1,6 @@
+import { HTTP_STATUS as Status } from '@core/constants/http_status';
 import { consola } from 'consola';
 import Elysia from 'elysia';
-import { HTTP_STATUS as Status } from '@core/constants/http_status';
 
 export const logger = ({ methods = ['GET', 'PUT', 'POST', 'DELETE'] } = {}) =>
   new Elysia({ name: 'logger' })

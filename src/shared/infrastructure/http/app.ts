@@ -1,3 +1,4 @@
+import { HTTP_STATUS as Status } from '@core/constants/http_status';
 import cors from '@elysiajs/cors';
 import serverTiming from '@elysiajs/server-timing';
 import swagger from '@elysiajs/swagger';
@@ -7,7 +8,6 @@ import { env } from '../../../config/envs';
 import { pluginGracefulServer } from './plugins/graceful_shutdown/graceful_shutdown';
 import { logger } from './plugins/logger/simple_logger';
 import { requestID } from './plugins/request_id/request_id_plugin';
-import { HTTP_STATUS as Status } from '@core/constants/http_status';
 
 export const http = new Elysia()
   .use(requestID())
